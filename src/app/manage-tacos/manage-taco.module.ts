@@ -5,9 +5,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ManageTacoComponent } from './manage-taco.component';
 import { ManageTacoRoutingModule } from './manage-taco-routing.module';
 import { NgModule } from '@angular/core';
+import { ListTacosComponent } from './list-tacos/list-tacos.component';
 
 @NgModule({
-  declarations: [ManageTacoComponent, CreateTacoComponent],
+  declarations: [ManageTacoComponent, CreateTacoComponent, ListTacosComponent],
   imports: [
     CommonModule,
     ManageTacoRoutingModule,
