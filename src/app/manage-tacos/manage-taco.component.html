@@ -1,0 +1,25 @@
+<div class="container" fxLayout="row" fxFlex="100%" fxLayoutAlign="start start">
+  <div class="nav-sidebar back-sidebar" fxLayout="column" fxFlexFill fxFlex="200px">
+    <mat-nav-list>
+      <mat-list-item *ngFor="let item of listItems" (click)="handleClick(item)">
+        <mat-icon matListIcon>{{item.icon}}</mat-icon>
+        <a [routerLink]="item.link" routerLinkActive="active" matLine>
+          {{item.linkTitle}}
+        </a>
+      </mat-list-item>
+    </mat-nav-list>
+  </div>
+  <div class="main-content" fxFlex fxLayout="column">
+    <mat-toolbar class='mat-primary' fxLayoutGap="8px">
+      <a mat-button routerLink="/manage-tacos/create-taco" routerLinkActive="active-link">
+        Create a New Taco</a>
+      <a mat-button routerLink="/manage-tacos/list-tacos" routerLinkActive="active-link">
+        List My Tacos</a>
+      <a mat-button routerLink="/manage-tacos/list-tacos" routerLinkActive="active-link">
+        List My Tacos</a>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </div>
+
+
+</div>

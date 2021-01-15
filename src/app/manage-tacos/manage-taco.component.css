@@ -1,0 +1,24 @@
+div[fixLayout] {
+  /* selects all element with fixLayout attribute */
+  margin-top: 32px;
+}
+.active-link {
+  font-weight: bold;
+  border-bottom: 2px solid #005005;
+}
+
+.mat-toolbar.mat-primary {
+  background: #007bff;
+  color: #fff;
+}
+
+.back-sidebar {
+  background: #007bff;
+  color: #fff;
+}
+
+.active {
+  color: #673ab7;
+  font-weight: bold !important;
+  border-bottom: 2px solid #005005;
+}

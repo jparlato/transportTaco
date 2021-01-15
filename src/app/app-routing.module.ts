@@ -15,6 +15,13 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
+    path: 'manage-tacos',
+    loadChildren: () =>
+      import('./manage-tacos/manage-taco.module').then(
+        (m) => m.ManageTacoModule
+      ),
+  },
+  {
     path: '**',
     component: PageNotFoundComponent,
   },

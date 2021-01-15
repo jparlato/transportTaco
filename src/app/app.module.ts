@@ -6,6 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ManageTacoModule } from './manage-tacos/manage-taco.module';
 import { NgModule } from '@angular/core';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
@@ -20,6 +21,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     FlexLayoutModule,
     HttpClientModule,
     AppMaterialModule,
+    ManageTacoModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
