@@ -1,1 +1,15 @@
-<p>create-taco-step1 works!</p>
+<div [formGroup]="form">
+  <mat-form-field>
+
+    <mat-select placeholder="Select Shell Type" formControlName="shellType">
+
+      <ng-container *ngFor="let shellType of (shellTypes$ | async)">
+
+        <mat-option [value]="shellType.code">{{shellType.description}}</mat-option>
+
+      </ng-container>
+
+    </mat-select>
+
+  </mat-form-field>
+</div>
