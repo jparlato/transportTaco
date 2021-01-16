@@ -1,6 +1,6 @@
 <div [formGroup]="form">
 
-  <mat-form-field>
+  <mat-form-field *ngIf="form">
 
     <input matInput placeholder="Toco Recipe Name" formControlName="recipeName" #recipeName>
 

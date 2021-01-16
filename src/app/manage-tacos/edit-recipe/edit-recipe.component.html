@@ -1,1 +1,81 @@
-<p>edit-recipe works!</p>
+<div [formGroup]="form">
+
+  <mat-form-field>
+
+    <input matInput placeholder="Toco Recipe Name" formControlName="recipeName" #recipeName>
+
+    <mat-hint align="end">
+      {{ recipeName.value.length }} / 60
+    </mat-hint>
+
+
+    <mat-error *ngIf="f.recipeName.errors?.required">
+      A recipe name is required.</mat-error>
+    <mat-error *ngIf="f.recipeName.errors?.maxlength">
+      A recipe name is cannot be longer than 60.</mat-error>
+    <mat-error *ngIf="f.recipeName.errors?.minlength">
+      A recipe name must be at least 5 characters.</mat-error>
+
+  </mat-form-field>
+
+  <div>
+    <div>
+      <mat-form-field>
+
+        <mat-select placeholder="Select Shell Type" formControlName="shellType">
+
+          <ng-container *ngFor="let shellType of (shellTypes$ | async)">
+
+            <mat-option [value]="shellType.code">{{shellType.description}}</mat-option>
+
+          </ng-container>
+
+        </mat-select>
+
+
+      </mat-form-field>
+    </div>
+
+
+    <mat-form-field>
+
+      <mat-select placeholder="Select Protein Type" formControlName="proteinType">
+
+        <ng-container *ngFor="let proteinType of (proteinTypes$ | async)">
+
+          <mat-option [value]="proteinType.code">{{proteinType.description}}</mat-option>
+
+        </ng-container>
+
+      </mat-select>
+
+    </mat-form-field>
+
+    <ng-container formArrayName="myChoices">
+      <div *ngFor="let cb of toppingsTypes$ | async; let i=index">
+        <label>
+          <input type="checkbox" [value]="cb.code" (change)="onCheckboxChange($event)" />
+          {{cb.description}}
+        </label>
+      </div>
+    </ng-container>
+
+  </div>
+  <mat-divider></mat-divider>
+  <mat-card class="taco-card">
+    <mat-card-header>
+
+      <div mat-card-avatar class="taco-header-image"></div>
+      <mat-card-title>Your Current Recipe:</mat-card-title>
+      <mat-card-subtitle></mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content *ngIf="tacoData$ | async as tdata">
+      {{ tdata.recipeName }}
+    </mat-card-content>
+  </mat-card>
+
+
+  <button mat-raised-button color="primary" (click)="onSave()">
+    Save Changes</button>
+
+</div>

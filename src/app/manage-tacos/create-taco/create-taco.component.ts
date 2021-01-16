@@ -74,15 +74,16 @@ export class CreateTacoComponent implements OnInit {
     }
   }
 
-  createRecipe({
-    recipeName = '',
-    shellType = '',
-    proteinType = '',
-    toppingsType = '',
-    id = 0,
-  }): Recipe {
-    return { recipeName, shellType, proteinType, toppingsType, id };
-  }
+  // createRecipe({
+  //   recipeName = '',
+  //   shellType = '',
+  //   proteinType = '',
+  //   toppingsType = '',
+  //   id = 0,
+  //   toppings: [],
+  // }): Recipe {
+  //   return { recipeName, shellType, proteinType, toppingsType, id, toppings };
+  // }
 
   ngOnInit(): void {
     this.tacoData$ = this.tacoStateService.tacoData;

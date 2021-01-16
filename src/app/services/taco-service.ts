@@ -44,6 +44,10 @@ export class TacoService {
   }
 
   // tslint:disable-next-line: typedef
+  findRecipeById(recipeId: string | number) {
+    return this.http.get('/api/recipe/' + recipeId);
+  }
+  // tslint:disable-next-line: typedef
   deleteRecipe(recipeId: string | number) {
     return this.http.delete('/api/recipe/' + recipeId);
   }

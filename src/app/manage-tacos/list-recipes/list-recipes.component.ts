@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, Subscription, of } from 'rxjs';
 
 import { Recipe } from 'src/app/entities/recipe';
+import { Router } from '@angular/router';
 import { TacoService } from './../../services/taco-service';
 
 @Component({
@@ -13,7 +14,7 @@ export class ListRecipesComponent implements OnInit {
   subcriptions!: Subscription;
   recipesFound$!: Observable<Recipe[]>;
 
-  constructor(private tacoService: TacoService) {}
+  constructor(private tacoService: TacoService, private router: Router) {}
 
   ngOnInit(): void {
     this.subcriptions = this.tacoService
@@ -31,5 +32,7 @@ export class ListRecipesComponent implements OnInit {
   // tslint:disable-next-line: typedef
   onEditRecipe(recipe: any): void {
     console.log(`id to edit is ${recipe.id}`);
+    this.router.navigateByUrl(`manage-tacos/recipe/${recipe.id}`);
+    // this.router.navigate(['/recipe'], { queryParams: { id: recipe.id } });
   }
 }
