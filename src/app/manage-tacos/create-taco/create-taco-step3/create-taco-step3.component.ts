@@ -1,14 +1,16 @@
 import {
   AbstractControl,
+  FormArray,
   FormBuilder,
+  FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import { ToppingType } from '../../interfaces/taco-interfaces';
 import { TacoService } from './../../../services/taco-service';
+import { ToppingType } from '../../interfaces/taco-interfaces';
 import { filter } from 'rxjs/operators';
 
 @Component({
@@ -19,6 +21,7 @@ import { filter } from 'rxjs/operators';
 export class CreateTacoStep3Component implements OnInit {
   form: FormGroup = this.fb.group({
     toppingsType: ['NONE', Validators.required],
+    myChoices: new FormArray([]),
   });
 
   toppingsTypes$!: Observable<ToppingType[]> | undefined;
@@ -38,6 +41,24 @@ export class CreateTacoStep3Component implements OnInit {
     this.form.valueChanges
       .pipe(filter(() => this.form.valid))
       .subscribe((val) => localStorage.setItem('STEP_3', JSON.stringify(val)));
+  }
+
+  // tslint:disable-next-line: typedef
+  onCheckboxChange(e: any) {
+    const checkArray: FormArray = this.form.get('myChoices') as FormArray;
+
+    if (e.target.checked) {
+      checkArray.push(new FormControl(e.target.value));
+    } else {
+      let i = 0;
+      checkArray.controls.forEach((item: AbstractControl) => {
+        if (item.value === e.target.value) {
+          checkArray.removeAt(i);
+          return;
+        }
+        i++;
+      });
+    }
   }
 
   get toppingsType(): AbstractControl {

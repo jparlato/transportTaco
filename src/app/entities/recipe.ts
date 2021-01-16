@@ -4,6 +4,7 @@ export interface Recipe {
   shellType?: string;
   proteinType?: string;
   toppingsType?: string;
+  toppings?: string[];
 }
 
 export interface RecipeEntities {

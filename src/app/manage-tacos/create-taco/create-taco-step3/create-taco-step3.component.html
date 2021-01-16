@@ -14,4 +14,13 @@
 
   </mat-form-field>
 
+  <ng-container formArrayName="toppings">
+    <div *ngFor="let cb of toppingsTypes$ | async; let i=index">
+      <label>
+        <input type="checkbox" [value]="cb.code" (change)="onCheckboxChange($event)" />
+        {{cb.description}}
+      </label>
+    </div>
+  </ng-container>
+
 </div>

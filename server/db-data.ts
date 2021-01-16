@@ -48,5 +48,6 @@ export const RECIPES: any = {
     shellType: 'SOFTSHELL',
     proteinType: 'MEAT',
     toppingsType: 'CHEESE',
+    toppings: [],
   },
 };
