@@ -65,7 +65,7 @@ export class CreateTacoComponent implements OnInit {
     }
 
     if (recipeToSave && recipeToSave.recipeName.length > 0) {
-      this.tacoService.createRecipe(recipeToSave);
+      this.tacoService.createRecipe(recipeToSave).subscribe(() => {});
       console.log(recipeToSave);
     } else {
       console.log('Invalid recipe cannot be saved.');

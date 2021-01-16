@@ -13,7 +13,10 @@ import { saveRecipe } from './save-recipe.route';
 const app: Application = express();
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
+const cors = require('cors');
+
 app.use(bodyParser.json());
+app.use(cors());
 
 app.route('/api/recipe').post(createRecipe);
 
