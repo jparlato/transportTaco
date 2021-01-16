@@ -48,6 +48,7 @@ export class CreateTacoComponent implements OnInit {
       shellType: '',
       proteinType: '',
       toppingsType: '',
+      toppings: [],
     };
 
     if (draft1) {
@@ -62,6 +63,7 @@ export class CreateTacoComponent implements OnInit {
     if (draft3) {
       recipe = JSON.parse(draft3);
       recipeToSave.toppingsType = recipe.toppingsType;
+      recipeToSave.toppings = recipe.myChoices;
     }
 
     if (recipeToSave && recipeToSave.recipeName.length > 0) {

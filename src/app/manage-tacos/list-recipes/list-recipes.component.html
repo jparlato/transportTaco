@@ -19,8 +19,17 @@
         <mat-card-content>
           Name: {{ recipe.recipeName }} Shell Type: {{ recipe.shellType }} Protein: {{ recipe.proteinType}}
           Topping: {{ recipe.toppingsType }}
+
+          <mat-list *ngFor="let tp of recipe.toppings">
+            <mat-list-item> {{ tp }} </mat-list-item>
+          </mat-list>
+
+
         </mat-card-content>
+
       </mat-card>
+
+
 
     </li>
 
