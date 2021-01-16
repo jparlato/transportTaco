@@ -24,8 +24,12 @@ export class ListRecipesComponent implements OnInit {
   }
 
   // tslint:disable-next-line: typedef
-  onDeleteRecipe(event: Event): void {
-    console.log(event);
-    const idToDelete = event.target;
+  onDeleteRecipe(recipe: any): void {
+    console.log(`id to delete is ${recipe.id}`);
+  }
+
+  // tslint:disable-next-line: typedef
+  onEditRecipe(recipe: any): void {
+    console.log(`id to edit is ${recipe.id}`);
   }
 }

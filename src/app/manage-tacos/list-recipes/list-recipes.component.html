@@ -5,9 +5,10 @@
   <div *ngIf="recipesFound$; else notfound_content">
     <li *ngFor="let recipe of recipesFound$ | async">
       <mat-label>ID: {{ recipe.id }} </mat-label>
-      <button mat-raised-button color="primary" (click)="onDeleteRecipe($event)">
+      <button mat-raised-button color="warn" (click)="onDeleteRecipe(recipe)">
         Delete this recipe</button>
-
+      <button mat-raised-button color="primary" (click)="onEditRecipe(recipe)">
+        Edit this recipe</button>
       <mat-card class="recipe-card">
         <mat-card-header>
 

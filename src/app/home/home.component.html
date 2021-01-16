@@ -1,5 +1,10 @@
 <div fxLayout="column" fxLayoutAlign="center center">
   <span class="mat-display-2">Hello, Taco Lover!</span>
-  <button routerLink="/manage-tacos/home" mat-raised-button coloer="primary">Create your taco.
+  <button routerLink="/manage-tacos/home" mat-raised-button color="primary">Create your taco.
+  </button>
+  <mat-divider>
+
+  </mat-divider>
+  <button (click)="onClearSession()" mat-raised-button color="warn">Clear Drafts.
   </button>
 </div>

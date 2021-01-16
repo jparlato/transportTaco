@@ -8,7 +8,7 @@ export let recipeKeyCounter = 100;
 export function createRecipe(req: Request, res: Response) {
   console.log('Creating new recipe ...');
   // tslint:disable-next-line: no-debugger
-  debugger;
+  // debugger;
   const changes = req.body;
   console.log(`reqest:  ${req}`);
 
@@ -16,6 +16,8 @@ export function createRecipe(req: Request, res: Response) {
     id: recipeKeyCounter,
     ...changes,
   };
+
+  newRecipe.id = recipeKeyCounter;
 
   console.log(`recipe create using ${newRecipe}`);
   RECIPES[newRecipe.id] = newRecipe;
