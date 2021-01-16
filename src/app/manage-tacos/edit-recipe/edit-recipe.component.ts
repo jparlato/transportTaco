@@ -12,7 +12,7 @@ import {
   ProteinType,
   ShellType,
   ToppingType,
-} from '../interfaces/taco-interfaces';
+} from './../interfaces/taco-interfaces';
 
 import { ActivatedRoute } from '@angular/router';
 import { Recipe } from 'src/app/entities/recipe';
@@ -35,6 +35,8 @@ const recipeToSave: Recipe = {
   styleUrls: ['./edit-recipe.component.css'],
 })
 export class EditRecipeComponent implements OnInit {
+  recipeInEdit!: Recipe;
+
   form: FormGroup = this.fb.group({
     recipeName: [
       '',
@@ -50,7 +52,7 @@ export class EditRecipeComponent implements OnInit {
   shellTypes$!: Observable<ShellType[]>;
   proteinTypes$!: Observable<ProteinType[]> | undefined;
   toppingsTypes$!: Observable<ToppingType[]> | undefined;
-  tacoData$: Observable<TacoData> = of({ recipeName: '' });
+
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
@@ -59,12 +61,24 @@ export class EditRecipeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.tacoData$ = this.tacoStateService.tacoData;
+    this.shellTypes$ = this.tacoService.findTacoShellTypes();
+    this.proteinTypes$ = this.tacoService.findTacoProteinTypes();
+
     this.subscription = this.tacoService
       .findRecipeById(this.route.snapshot.params.id)
       .subscribe((res: any) => {
-        this.updateTacoData(res);
         this.recipeFound$ = of(res);
+        this.recipeInEdit = res;
+        this.updateTacoData(res);
+
+        if (this.recipeInEdit) {
+          this.form.patchValue({
+            recipeName: this.recipeInEdit.recipeName,
+            shellType: this.recipeInEdit.shellType,
+            myChoices: this.recipeInEdit.toppings,
+            ProteinType: this.recipeInEdit.proteinType,
+          });
+        }
       });
 
     this.form.valueChanges

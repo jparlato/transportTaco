@@ -51,11 +51,13 @@
 
     </mat-form-field>
 
+    <!-- <pre>{{recipeInEdit.toppings | json}} </pre> -->
+
     <ng-container formArrayName="myChoices">
-      <div *ngFor="let cb of toppingsTypes$ | async; let i=index">
+      <div *ngFor="let cb of recipeInEdit.toppings let i=index">
         <label>
-          <input type="checkbox" [value]="cb.code" (change)="onCheckboxChange($event)" />
-          {{cb.description}}
+          <input checked type="checkbox" [value]="cb" (change)="onCheckboxChange($event)" />
+          {{cb}}
         </label>
       </div>
     </ng-container>
@@ -69,10 +71,11 @@
       <mat-card-title>Your Current Recipe:</mat-card-title>
       <mat-card-subtitle></mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content *ngIf="tacoData$ | async as tdata">
-      {{ tdata.recipeName }}
+    <mat-card-content *ngIf="recipeFound$ | async as rp">
+      {{ rp.recipeName }}
     </mat-card-content>
   </mat-card>
+
 
 
   <button mat-raised-button color="primary" (click)="onSave()">
