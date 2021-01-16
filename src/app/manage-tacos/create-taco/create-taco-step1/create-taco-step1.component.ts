@@ -50,6 +50,10 @@ export class CreateTacoStep1Component implements OnInit {
   }
 
   // tslint:disable-next-line: typedef
+  get f() {
+    return this.form.controls;
+  }
+  // tslint:disable-next-line: typedef
   get shellType() {
     // tslint:disable-next-line: no-string-literal
     return this.form.get('shellType');
