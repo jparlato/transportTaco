@@ -1,6 +1,11 @@
 export interface Recipe {
-  name: string;
-  shellType: string;
-  proteinType: string;
-  toppingType: string;
+  id?: number;
+  recipeName: string;
+  shellType?: string;
+  proteinType?: string;
+  toppingsType?: string;
+}
+
+export interface RecipeEntities {
+  [key: number]: Recipe;
 }

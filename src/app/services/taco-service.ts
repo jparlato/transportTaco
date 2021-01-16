@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { Recipe } from '../entities/recipe';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { Recipe } from '../entities/recipe';
+import { map } from 'rxjs/operators';
+
 @Injectable()
 export class TacoService {
   constructor(private http: HttpClient) {}
@@ -35,6 +36,12 @@ export class TacoService {
   // tslint:disable-next-line: typedef
   saveRecipe(recipeId: string | number, changes: Partial<Recipe>) {
     return this.http.put('/api/recipe/' + recipeId, changes);
+  }
+
+  // tslint:disable-next-line: typedef
+  createRecipe(recipe: Recipe) {
+    console.log(`in service createReipe with ${JSON.stringify(recipe)}`);
+    return this.http.post('/api/recipe', recipe);
   }
 
   // tslint:disable-next-line: typedef

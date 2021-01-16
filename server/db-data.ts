@@ -44,7 +44,7 @@ export const TOPPINGS: any = {
 export const RECIPES: any = {
   1: {
     id: 1,
-    name: 'SamsOne',
+    recipeName: 'SamsOne',
     shellType: 'SOFTSHELL',
     proteinType: 'MEAT',
     toppingType: 'CHEESE',
