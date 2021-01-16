@@ -1,3 +1,4 @@
+import { TacoStateService } from './../services/taco-state-service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppMaterialModule } from './../app-material.module';
@@ -30,6 +31,6 @@ import { CreateTacoStep3Component } from './create-taco/create-taco-step3/create
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [TacoService],
+  providers: [TacoService, TacoStateService],
 })
 export class ManageTacoModule {}

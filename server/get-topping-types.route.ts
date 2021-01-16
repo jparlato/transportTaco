@@ -16,6 +16,10 @@ export function getToppingTypes(req: Request, res: Response) {
         code: 'SOUR CREAM',
         description: 'Sour Cream',
       },
+      {
+        code: 'NONE',
+        description: 'No Toppings',
+      },
     ],
   });
 }

@@ -1,1 +1,17 @@
-<p>create-taco-step3 works!</p>
+<div [formGroup]="form">
+
+  <mat-form-field>
+
+    <mat-select placeholder="Select Toppings Type" formControlName="toppingsType">
+
+      <ng-container *ngFor="let topping of (toppingsTypes$ | async)">
+
+        <mat-option [value]="topping.code">{{topping.description}}</mat-option>
+
+      </ng-container>
+
+    </mat-select>
+
+  </mat-form-field>
+
+</div>

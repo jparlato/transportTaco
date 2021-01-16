@@ -1,0 +1,13 @@
+p {
+  font-family: Lato;
+}
+
+.taco-card {
+  max-width: 300px;
+  margin: 4px
+}
+
+.taco-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}

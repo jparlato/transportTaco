@@ -1,3 +1,5 @@
+import { TacoStateService } from './../../../services/taco-state-service';
+import { TacoData } from './../../../entities/taco-data';
 import {
   AbstractControl,
   FormBuilder,
@@ -27,7 +29,11 @@ export class CreateTacoStep1Component implements OnInit {
 
   shellTypes$!: Observable<ShellType[]>;
 
-  constructor(private fb: FormBuilder, private tacoService: TacoService) {}
+  constructor(
+    private fb: FormBuilder,
+    private tacoService: TacoService,
+    private tacoStateService: TacoStateService
+  ) {}
 
   ngOnInit(): void {
     this.shellTypes$ = this.tacoService.findTacoShellTypes();
@@ -41,12 +47,21 @@ export class CreateTacoStep1Component implements OnInit {
     this.form.valueChanges
       .pipe(filter(() => this.form.valid))
       .subscribe((val) => localStorage.setItem('STEP_1', JSON.stringify(val)));
+
+    const data: TacoData = { recipeName: '' };
+    data.recipeName = this.recipeName;
+    this.updateTacoData(data);
+  }
+
+  updateTacoData(data: TacoData): void {
+    const tacoData = { ...data };
+    this.tacoStateService.updatedDataSelection(tacoData);
   }
 
   // tslint:disable-next-line: typedef
   get recipeName() {
     // tslint:disable-next-line: no-string-literal
-    return this.form.controls['recipeName'];
+    return this.form.controls['recipeName'].value;
   }
 
   // tslint:disable-next-line: typedef

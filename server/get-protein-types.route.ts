@@ -18,7 +18,7 @@ export function getProteinTypes(req: Request, res: Response) {
       },
       {
         code: 'NONE',
-        description: 'None',
+        description: 'No Protein',
       },
     ],
   });

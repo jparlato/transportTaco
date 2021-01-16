@@ -1,68 +1,84 @@
-<div class="create-course-panel data-form">
+<div [formGroup]="form">
 
-  <h2 class="title">Create New Taco</h2>
+  <div class="create-course-panel data-form">
 
-  <mat-horizontal-stepper [linear]="false" class="mat-elevation-z5" labelPosition="bottom">
+    <h2 class="title">Create New Taco</h2>
 
-    <mat-step [stepControl]="step1.form" errorMessage="Create Taco Landing page in error">
+    <mat-horizontal-stepper [linear]="false" class="mat-elevation-z5" labelPosition="bottom">
 
-      <ng-template matStepLabel>create taco landing page details</ng-template>
+      <mat-step [stepControl]="step1.form" errorMessage="Create Taco Landing page in error">
 
-      <app-create-taco-step1 #step1>
-      </app-create-taco-step1>
+        <ng-template matStepLabel>Recipie Name and Shell Type</ng-template>
 
-      <div class="stepper-buttons">
+        <app-create-taco-step1 #step1>
+        </app-create-taco-step1>
 
-        <button mat-raised-button color="primary" [disabled]="!step1.form.valid" matStepperNext>
-          Continue to Proteins</button>
-      </div>
+        <div class="stepper-buttons">
 
-    </mat-step>
+          <button mat-raised-button color="primary" [disabled]="!step1.form.valid" matStepperNext>
+            Continue to Proteins</button>
+        </div>
 
-
-    <mat-step errorMessage="Protein Selections Errors">
-
-      <app-create-taco-step2 #step2>
-      </app-create-taco-step2>
-
-      <ng-template matStepLabel>Protein Selections</ng-template>
-
-      <div class="stepper-buttons">
-
-        <button mat-raised-button matStepperPrevious>Back</button>
-
-        <button mat-raised-button color="primary" [disabled]="!step2.form.valid" matStepperNext>
-          Add Toppings Next</button>
-
-      </div>
-    </mat-step>
-
-    <mat-step errorMessage="Toppings in error">
-
-      <app-create-taco-step3 #step3>
-      </app-create-taco-step3>
-
-      <ng-template matStepLabel>taco topping details</ng-template>
-
-      <div class="stepper-buttons">
-
-        <button mat-raised-button matStepperPrevious>Back</button>
-
-        <button mat-raised-button color="primary" (click)="onSaveRecipe()">
-          Save this recipe</button>
-
-      </div>
+      </mat-step>
 
 
-    </mat-step>
+      <mat-step errorMessage="Protein Selections Errors">
 
-  </mat-horizontal-stepper>
+        <app-create-taco-step2 #step2>
+        </app-create-taco-step2>
+
+        <ng-template matStepLabel>Protein Selections</ng-template>
+
+        <div class="stepper-buttons">
+
+          <button mat-raised-button matStepperPrevious>Back</button>
+
+          <button mat-raised-button color="primary" [disabled]="!step2.form.valid" matStepperNext>
+            Add Toppings Next</button>
+
+        </div>
+      </mat-step>
+
+      <mat-step errorMessage="Toppings in error">
+
+        <app-create-taco-step3 #step3>
+        </app-create-taco-step3>
+
+        <ng-template matStepLabel>Last, Add Toppings</ng-template>
+
+        <div class="stepper-buttons">
+
+          <button mat-raised-button matStepperPrevious>Back</button>
+
+          <button mat-raised-button color="primary" (click)="onSaveRecipe()">
+            Save this recipe</button>
+
+        </div>
 
 
-</div>
+      </mat-step>
+
+      <mat-divider></mat-divider>
+
+    </mat-horizontal-stepper>
+    <mat-divider></mat-divider>
+    <mat-card class="taco-card">
+      <mat-card-header>
+
+        <div mat-card-avatar class="taco-header-image"></div>
+        <mat-card-title>Your Current Recipe:</mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content *ngIf="tacoData$ | async as tdata">
+        {{ tdata.recipeName }}
+      </mat-card-content>
+    </mat-card>
+
+  </div>
 
 
-<div class="scrolling-space">
+  <div class="scrolling-space">
 
 
+  </div>
 </div>
