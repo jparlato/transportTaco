@@ -53,7 +53,7 @@
 
     <!-- <pre>{{recipeInEdit.toppings | json}} </pre> -->
 
-    <ng-container formArrayName="myChoices">
+    <ng-container *ngIf="recipeInEdit" formArrayName="myChoices">
       <div *ngFor="let cb of recipeInEdit.toppings let i=index">
         <label>
           <input checked type="checkbox" [value]="cb" (change)="onCheckboxChange($event)" />

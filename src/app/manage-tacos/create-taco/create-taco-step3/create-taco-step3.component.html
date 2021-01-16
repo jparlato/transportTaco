@@ -1,6 +1,6 @@
 <div [formGroup]="form">
 
-  <mat-form-field>
+  <!-- <mat-form-field>
 
     <mat-select placeholder="Select Toppings Type" formControlName="toppingsType">
 
@@ -12,7 +12,7 @@
 
     </mat-select>
 
-  </mat-form-field>
+  </mat-form-field> -->
 
   <ng-container formArrayName="myChoices">
     <div *ngFor="let cb of toppingsTypes$ | async; let i=index">
