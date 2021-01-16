@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-
+import { Recipe } from '../entities/recipe';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 @Injectable()
 export class TacoService {
   constructor(private http: HttpClient) {}
@@ -31,37 +32,19 @@ export class TacoService {
       .pipe(map((res: any) => res['ToppingTypes']));
   }
 
-  // findAllCourses(): Observable<Course[]> {
-  //     return this.http.get('/api/courses')
-  //         .pipe(
-  //             map(res => res['payload'])
-  //         );
-  // }
+  // tslint:disable-next-line: typedef
+  saveRecipe(recipeId: string | number, changes: Partial<Recipe>) {
+    return this.http.put('/api/recipe/' + recipeId, changes);
+  }
 
-  // findAllCourseLessons(courseId:number): Observable<Lesson[]> {
-  //     return this.http.get('/api/lessons', {
-  //         params: new HttpParams()
-  //             .set('courseId', courseId.toString())
-  //             .set('pageNumber', '0')
-  //             .set('pageSize', '1000')
-  //     }).pipe(
-  //         map(res =>  res['payload'])
-  //     );
-  // }
+  // tslint:disable-next-line: typedef
+  deleteRecipe(recipeId: string | number) {
+    return this.http.delete('/api/recipe/' + recipeId);
+  }
 
-  // findLessons(
-  //     courseId:number, filter = '', sortOrder = 'asc',
-  //     pageNumber = 0, pageSize = 3):  Observable<Lesson[]> {
-
-  //     return this.http.get('/api/lessons', {
-  //         params: new HttpParams()
-  //             .set('courseId', courseId.toString())
-  //             .set('filter', filter)
-  //             .set('sortOrder', sortOrder)
-  //             .set('pageNumber', pageNumber.toString())
-  //             .set('pageSize', pageSize.toString())
-  //     }).pipe(
-  //         map(res =>  res['payload'])
-  //     );
-  // }
+  findAllRecipes(): Observable<Recipe[]> {
+    return this.http
+      .get('/api/recipes')
+      .pipe(map((res: any) => res['payload']));
+  }
 }

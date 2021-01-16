@@ -41,3 +41,12 @@ export const TOPPINGS: any = {
     description: 'Sour Cream',
   },
 };
+export const RECIPES: any = {
+  1: {
+    id: 1,
+    name: 'SamsOne',
+    shellType: 'SOFTSHELL',
+    proteinType: 'MEAT',
+    toppingType: 'CHEESE',
+  },
+};
