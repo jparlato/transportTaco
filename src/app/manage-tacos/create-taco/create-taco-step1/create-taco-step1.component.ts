@@ -46,11 +46,13 @@ export class CreateTacoStep1Component implements OnInit {
 
     this.form.valueChanges
       .pipe(filter(() => this.form.valid))
-      .subscribe((val) => localStorage.setItem('STEP_1', JSON.stringify(val)));
+      .subscribe((val) => {
+        localStorage.setItem('STEP_1', JSON.stringify(val));
 
-    const data: TacoData = { recipeName: '' };
-    data.recipeName = this.recipeName;
-    this.updateTacoData(data);
+        const data: TacoData = { recipeName: '' };
+        data.recipeName = this.recipeName;
+        this.updateTacoData(data);
+      });
   }
 
   updateTacoData(data: TacoData): void {
