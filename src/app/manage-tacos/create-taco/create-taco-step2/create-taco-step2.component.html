@@ -1,1 +1,17 @@
-<p>create-taco-step2 works!</p>
+<div [formGroup]="form">
+
+  <mat-form-field>
+
+    <mat-select placeholder="Select Protein Type" formControlName="proteinType">
+
+      <ng-container *ngFor="let proteinType of (proteinTypes$ | async)">
+
+        <mat-option [value]="proteinType.code">{{proteinType.description}}</mat-option>
+
+      </ng-container>
+
+    </mat-select>
+
+  </mat-form-field>
+
+</div>

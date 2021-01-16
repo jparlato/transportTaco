@@ -1,5 +1,10 @@
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Observable } from 'rxjs';
 import { ShellType } from '../../interfaces/taco-interfaces';
@@ -13,7 +18,10 @@ import { filter } from 'rxjs/operators';
 })
 export class CreateTacoStep1Component implements OnInit {
   form: FormGroup = this.fb.group({
-    recipeName: ['', [Validators.required, Validators.minLength(3)]],
+    recipeName: [
+      '',
+      [Validators.required, Validators.minLength(3), Validators.maxLength(60)],
+    ],
     shellType: ['SOFTSHELL', Validators.required],
   });
 
@@ -33,5 +41,17 @@ export class CreateTacoStep1Component implements OnInit {
     this.form.valueChanges
       .pipe(filter(() => this.form.valid))
       .subscribe((val) => localStorage.setItem('STEP_1', JSON.stringify(val)));
+  }
+
+  // tslint:disable-next-line: typedef
+  get recipeName() {
+    // tslint:disable-next-line: no-string-literal
+    return this.form.controls['recipeName'];
+  }
+
+  // tslint:disable-next-line: typedef
+  get shellType() {
+    // tslint:disable-next-line: no-string-literal
+    return this.form.get('shellType');
   }
 }

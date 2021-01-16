@@ -14,16 +14,33 @@
       <div class="stepper-buttons">
 
         <button mat-raised-button color="primary" [disabled]="!step1.form.valid" matStepperNext>
-          Continue to toppings</button>
+          Continue to Proteins</button>
       </div>
 
     </mat-step>
 
 
+    <mat-step errorMessage="Protein Selections Errors">
+
+      <app-create-taco-step2 #step2>
+      </app-create-taco-step2>
+
+      <ng-template matStepLabel>Protein Selections</ng-template>
+
+      <div class="stepper-buttons">
+
+        <button mat-raised-button matStepperPrevious>Back</button>
+
+        <button mat-raised-button color="primary" [disabled]="!step2.form.valid" matStepperNext>
+          Add Toppings Next</button>
+
+      </div>
+    </mat-step>
+
     <mat-step errorMessage="Toppings in error">
 
-      <app-create-taco-step2>
-      </app-create-taco-step2>
+      <app-create-taco-step3 #step3>
+      </app-create-taco-step3>
 
       <ng-template matStepLabel>taco topping details</ng-template>
 
@@ -31,8 +48,8 @@
 
         <button mat-raised-button matStepperPrevious>Back</button>
 
-        <button mat-raised-button color="primary" matStepperNext>
-          Continue to Step 3</button>
+        <button mat-raised-button color="primary" (click)="onSaveRecipe()">
+          Save this recipe</button>
 
       </div>
 

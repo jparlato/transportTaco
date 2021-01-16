@@ -22,6 +22,20 @@ export class TacoService {
       .pipe(map((res: any) => res['shellTypes']));
   }
 
+  // tslint:disable-next-line: typedef
+  findTacoProteinTypes() {
+    return this.http
+      .get(`/api/getProteinTypes`)
+      .pipe(map((res: any) => res['ProteinTypes']));
+  }
+
+  // tslint:disable-next-line: typedef
+  findTacoToppingTypes() {
+    return this.http
+      .get(`/api/getToppingTypes`)
+      .pipe(map((res: any) => res['ToppingTypes']));
+  }
+
   // findAllCourses(): Observable<Course[]> {
   //     return this.http.get('/api/courses')
   //         .pipe(

@@ -10,25 +10,31 @@
 
 
     <!-- <mat-error *ngIf="recipeName.errors?.required">
-      A recipe name is required.</mat-error>
-    <mat-error *ngIf="recipeName.errors?.maxlength">
-      A recipe name is cannot be longer than 60.</mat-error>
-    <mat-error *ngIf="recipeName.errors?.minlength">
-      A recipe name must be at least 5 characters.</mat-error> -->
+      A recipe name is required.</mat-error> -->
+    <!-- <mat-error *ngIf="recipeName.errors?.maxlength">
+        A recipe name is cannot be longer than 60.</mat-error>
+      <mat-error *ngIf="recipeName.errors?.minlength">
+        A recipe name must be at least 5 characters.</mat-error> -->
+
+
+
+
 
   </mat-form-field>
 
-  <mat-form-field>
+  <div>
+    <mat-form-field>
 
-    <mat-select placeholder="Select Shell Type" formControlName="shellType">
+      <mat-select placeholder="Select Shell Type" formControlName="shellType">
 
-      <ng-container *ngFor="let shellType of (shellTypes$ | async)">
+        <ng-container *ngFor="let shellType of (shellTypes$ | async)">
 
-        <mat-option [value]="shellType.code">{{shellType.description}}</mat-option>
+          <mat-option [value]="shellType.code">{{shellType.description}}</mat-option>
 
-      </ng-container>
+        </ng-container>
 
-    </mat-select>
+      </mat-select>
 
-  </mat-form-field>
+    </mat-form-field>
+  </div>
 </div>

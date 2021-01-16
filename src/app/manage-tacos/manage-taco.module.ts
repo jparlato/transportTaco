@@ -11,6 +11,7 @@ import { ManageTacoComponent } from './manage-taco.component';
 import { ManageTacoRoutingModule } from './manage-taco-routing.module';
 import { NgModule } from '@angular/core';
 import { TacoService } from './../services/taco-service';
+import { CreateTacoStep3Component } from './create-taco/create-taco-step3/create-taco-step3.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { TacoService } from './../services/taco-service';
     ListTacosComponent,
     CreateTacoStep1Component,
     CreateTacoStep2Component,
+    CreateTacoStep3Component,
   ],
   imports: [
     CommonModule,

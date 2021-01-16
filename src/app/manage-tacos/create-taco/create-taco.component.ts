@@ -8,5 +8,12 @@ import { Component, OnInit } from '@angular/core';
 export class CreateTacoComponent implements OnInit {
   constructor() {}
 
+  // tslint:disable-next-line: typedef
+  onSaveRecipe() {
+    console.log('hello');
+    const draft = localStorage.getItem('STEP_1');
+    console.log(draft);
+  }
+
   ngOnInit(): void {}
 }
