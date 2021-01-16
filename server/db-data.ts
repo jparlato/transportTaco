@@ -47,6 +47,6 @@ export const RECIPES: any = {
     recipeName: 'SamsOne',
     shellType: 'SOFTSHELL',
     proteinType: 'MEAT',
-    toppingType: 'CHEESE',
+    toppingsType: 'CHEESE',
   },
 };

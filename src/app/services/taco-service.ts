@@ -30,7 +30,7 @@ export class TacoService {
   findTacoToppingTypes() {
     return this.http
       .get(`/api/getToppingTypes`)
-      .pipe(map((res: any) => res['ToppingTypes']));
+      .pipe(map((res: any) => res['ToppingsTypes']));
   }
 
   // tslint:disable-next-line: typedef
@@ -40,7 +40,6 @@ export class TacoService {
 
   // tslint:disable-next-line: typedef
   createRecipe(recipe: Recipe) {
-    console.log(`in service createReipe with ${JSON.stringify(recipe)}`);
     return this.http.post('/api/recipe', recipe);
   }
 

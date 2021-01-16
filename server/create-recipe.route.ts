@@ -14,8 +14,6 @@ export function createRecipe(req: Request, res: Response) {
 
   const newRecipe = {
     id: recipeKeyCounter,
-    recipeName: '',
-    shellType: '',
     ...changes,
   };
 

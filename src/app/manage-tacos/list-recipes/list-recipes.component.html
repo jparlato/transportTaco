@@ -1,0 +1,31 @@
+<div class="container">
+  <div>
+    <p>Recipe List</p>
+  </div>
+  <div *ngIf="recipesFound$; else notfound_content">
+    <li *ngFor="let recipe of recipesFound$ | async">
+      <mat-label>ID: {{ recipe.id }} </mat-label>
+      <button mat-raised-button color="primary" (click)="onDeleteRecipe($event)">
+        Delete this recipe</button>
+
+      <mat-card class="recipe-card">
+        <mat-card-header>
+
+          <div mat-card-avatar class="recipe-header-image"></div>
+          <mat-card-title>Your Current Recipe(s):</mat-card-title>
+          <mat-card-subtitle></mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          Name: {{ recipe.recipeName }} Shell Type: {{ recipe.shellType }} Protein: {{ recipe.proteinType}}
+          Topping: {{ recipe.toppingsType }}
+        </mat-card-content>
+      </mat-card>
+
+    </li>
+
+  </div>
+
+
+  <ng-template #notfound_content>No recipies have been found...</ng-template>
+
+</div>

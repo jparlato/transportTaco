@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 // tslint:disable-next-line: typedef
 export function getToppingTypes(req: Request, res: Response) {
   res.status(200).json({
-    ToppingTypes: [
+    ToppingsTypes: [
       {
         code: 'CHEESE',
         description: 'Cheese',

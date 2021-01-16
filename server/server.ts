@@ -15,13 +15,13 @@ const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 app.use(bodyParser.json());
 
+app.route('/api/recipe').post(createRecipe);
+
 app.route('/api/getShellTypes').get(getShellTypes);
 
 app.route('/api/getProteinTypes').get(getProteinTypes);
 
 app.route('/api/getToppingTypes').get(getToppingTypes);
-
-app.route('/api/recipe').post(createRecipe);
 
 app.route('/api/recipe/:id').put(saveRecipe);
 
