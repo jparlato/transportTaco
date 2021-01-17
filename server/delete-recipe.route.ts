@@ -9,7 +9,7 @@ export function deleteRecipe(req: Request, res: Response) {
   debugger;
   const id = req.params['id'];
 
-  const course = RECIPES[id];
+  const recipe = RECIPES[id];
 
   delete RECIPES[id];
 

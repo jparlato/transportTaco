@@ -45,6 +45,7 @@ export class EditRecipeComponent implements OnInit {
     shellType: ['SOFTSHELL', Validators.required],
     myChoices: new FormArray([]),
     proteinType: ['MEAT', Validators.required],
+    id: '',
   });
 
   recipeFound$!: Observable<Recipe>;
@@ -78,6 +79,7 @@ export class EditRecipeComponent implements OnInit {
             shellType: this.recipeInEdit.shellType,
             myChoices: this.recipeInEdit.toppings,
             ProteinType: this.recipeInEdit.proteinType,
+            id: this.route.snapshot.params.id,
           });
         }
         localStorage.setItem('EDITRECIPE', JSON.stringify(this.recipeInEdit));
@@ -129,8 +131,9 @@ export class EditRecipeComponent implements OnInit {
     const draft = localStorage.getItem('EDITRECIPE');
 
     if (draft) {
-      const recipe = JSON.parse(draft);
+      const recipe: any = JSON.parse(draft);
       console.log(`saving ${JSON.stringify(recipe)}`);
+      this.tacoService.saveRecipe(recipe.id, recipe).subscribe(() => {});
     }
   }
 

@@ -34,8 +34,10 @@ export class TacoService {
   }
 
   // tslint:disable-next-line: typedef
-  saveRecipe(recipeId: string | number, changes: Partial<Recipe>) {
-    return this.http.put('/api/recipe/' + recipeId, changes);
+  saveRecipe(recipeId: number, changes: Partial<Recipe>) {
+    console.log(`in save recipe: ${JSON.stringify(changes)}`);
+
+    return this.http.put(`/api/recipe/${recipeId}`, changes);
   }
 
   // tslint:disable-next-line: typedef
