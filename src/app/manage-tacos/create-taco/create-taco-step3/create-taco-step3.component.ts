@@ -21,7 +21,7 @@ import { filter } from 'rxjs/operators';
 export class CreateTacoStep3Component implements OnInit {
   form: FormGroup = this.fb.group({
     toppingsType: ['NONE', Validators.required],
-    myChoices: new FormArray([]),
+    toppings: new FormArray([]),
   });
 
   toppingsTypes$!: Observable<ToppingType[]> | undefined;
@@ -45,7 +45,7 @@ export class CreateTacoStep3Component implements OnInit {
 
   // tslint:disable-next-line: typedef
   onCheckboxChange(e: any) {
-    const checkArray: FormArray = this.form.get('myChoices') as FormArray;
+    const checkArray: FormArray = this.form.get('toppings') as FormArray;
 
     if (e.target.checked) {
       checkArray.push(new FormControl(e.target.value));

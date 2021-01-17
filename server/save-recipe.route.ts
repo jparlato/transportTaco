@@ -14,6 +14,7 @@ export function saveRecipe(req: Request, res: Response) {
   console.log(` RECIPES[id]  ${RECIPES[id]}`);
   console.log(` id  ${id}`);
   console.log(` changes  ${JSON.stringify(changes)}`);
+  // const chgObj = JSON.parse(`'RECIPES: ${changes}`);
 
   RECIPES[id] = {
     ...RECIPES[id],

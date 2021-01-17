@@ -15,6 +15,7 @@ import {
 } from './../interfaces/taco-interfaces';
 
 import { ActivatedRoute } from '@angular/router';
+import { MatCheckbox } from '@angular/material/checkbox';
 import { Recipe } from 'src/app/entities/recipe';
 import { TacoData } from './../../entities/taco-data';
 import { TacoService } from './../../services/taco-service';
@@ -43,7 +44,7 @@ export class EditRecipeComponent implements OnInit {
       [Validators.required, Validators.minLength(3), Validators.maxLength(60)],
     ],
     shellType: ['SOFTSHELL', Validators.required],
-    myChoices: new FormArray([]),
+    toppings: new FormArray([]),
     proteinType: ['MEAT', Validators.required],
     id: '',
   });
@@ -73,14 +74,25 @@ export class EditRecipeComponent implements OnInit {
         this.recipeInEdit = res;
         this.updateTacoData(res);
 
-        if (this.recipeInEdit) {
-          this.form.patchValue({
-            recipeName: this.recipeInEdit.recipeName,
-            shellType: this.recipeInEdit.shellType,
-            myChoices: this.recipeInEdit.toppings,
-            ProteinType: this.recipeInEdit.proteinType,
-            id: this.route.snapshot.params.id,
-          });
+        // tslint:disable-next-line: no-string-literal
+        const choiceArray = this.form.controls['toppings'] as FormArray;
+
+        choiceArray.controls.forEach((cntl) => {
+          if (this.recipeInEdit.toppings?.includes(cntl.value)) {
+            cntl.setValue(true);
+          }
+        });
+        // toppings: this.recipeInEdit.toppings,
+
+        if (this.form) {
+          if (this.recipeInEdit) {
+            this.form.patchValue({
+              recipeName: this.recipeInEdit.recipeName,
+              shellType: this.recipeInEdit.shellType,
+              proteinType: this.recipeInEdit.proteinType,
+              id: this.route.snapshot.params.id,
+            });
+          }
         }
         localStorage.setItem('EDITRECIPE', JSON.stringify(this.recipeInEdit));
       });
@@ -111,15 +123,17 @@ export class EditRecipeComponent implements OnInit {
 
   // tslint:disable-next-line: typedef
   onCheckboxChange(e: any) {
-    const checkArray: FormArray = this.form.get('myChoices') as FormArray;
+    const checkArray: FormArray = this.form.get('toppings') as FormArray;
 
     if (e.target.checked) {
       checkArray.push(new FormControl(e.target.value));
+      localStorage.setItem('EDITRECIPE', JSON.stringify(this.form.value));
     } else {
       let i = 0;
       checkArray.controls.forEach((item: AbstractControl) => {
         if (item.value === e.target.value) {
           checkArray.removeAt(i);
+          localStorage.setItem('EDITRECIPE', JSON.stringify(this.form.value));
           return;
         }
         i++;

@@ -53,7 +53,7 @@
 
     <!-- <pre>{{recipeInEdit.toppings | json}} </pre> -->
 
-    <ng-container *ngIf="recipeInEdit" formArrayName="myChoices">
+    <ng-container *ngIf="recipeInEdit" formArrayName="toppings">
       <div *ngFor="let cb of toppingsTypes$ | async; let i=index">
 
         <div *ngIf="isChecked(cb.code)">
