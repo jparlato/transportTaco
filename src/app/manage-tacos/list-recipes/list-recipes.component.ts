@@ -4,6 +4,7 @@ import { Observable, Subscription, of } from 'rxjs';
 import { Recipe } from 'src/app/entities/recipe';
 import { Router } from '@angular/router';
 import { TacoService } from './../../services/taco-service';
+import { getAllRecipes } from 'server/get-recipes.route';
 
 @Component({
   selector: 'app-list-recipes',
@@ -17,6 +18,11 @@ export class ListRecipesComponent implements OnInit {
   constructor(private tacoService: TacoService, private router: Router) {}
 
   ngOnInit(): void {
+    this.getRecipes();
+  }
+
+  // tslint:disable-next-line: typedef
+  private getRecipes() {
     this.subcriptions = this.tacoService
       .findAllRecipes()
       .subscribe((res: any) => {
@@ -27,6 +33,9 @@ export class ListRecipesComponent implements OnInit {
   // tslint:disable-next-line: typedef
   onDeleteRecipe(recipe: any): void {
     console.log(`id to delete is ${recipe.id}`);
+    this.tacoService.deleteRecipe(recipe.id).subscribe(() => {
+      this.getRecipes();
+    });
   }
 
   // tslint:disable-next-line: typedef
