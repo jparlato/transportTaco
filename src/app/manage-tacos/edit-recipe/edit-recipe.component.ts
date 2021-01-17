@@ -63,6 +63,7 @@ export class EditRecipeComponent implements OnInit {
   ngOnInit(): void {
     this.shellTypes$ = this.tacoService.findTacoShellTypes();
     this.proteinTypes$ = this.tacoService.findTacoProteinTypes();
+    this.toppingsTypes$ = this.tacoService.findTacoToppingTypes();
 
     this.subscription = this.tacoService
       .findRecipeById(this.route.snapshot.params.id)
@@ -79,17 +80,26 @@ export class EditRecipeComponent implements OnInit {
             ProteinType: this.recipeInEdit.proteinType,
           });
         }
+        localStorage.setItem('EDITRECIPE', JSON.stringify(this.recipeInEdit));
       });
 
     this.form.valueChanges
       .pipe(filter(() => this.form.valid))
       .subscribe((val) => {
-        localStorage.setItem('STEP_1', JSON.stringify(val));
+        localStorage.setItem('EDITRECIPE', JSON.stringify(val));
 
-        const data: Recipe = recipeToSave;
+        const data: Recipe = this.recipeInEdit;
         data.recipeName = this.f.recipeName.value;
         this.updateTacoData(data);
       });
+  }
+
+  // tslint:disable-next-line: typedef
+  isChecked(cb: string) {
+    if (this.recipeInEdit.toppings?.includes(cb)) {
+      return true;
+    }
+    return false;
   }
 
   updateTacoData(data: TacoData): void {
@@ -116,14 +126,12 @@ export class EditRecipeComponent implements OnInit {
   }
   // tslint:disable-next-line: typedef
   onSave() {
-    this.shellTypes$ = this.tacoService.findTacoShellTypes();
-
     const draft = localStorage.getItem('EDITRECIPE');
 
     if (draft) {
       const recipe = JSON.parse(draft);
+      console.log(`saving ${JSON.stringify(recipe)}`);
     }
-    console.log('saving');
   }
 
   // tslint:disable-next-line: typedef
