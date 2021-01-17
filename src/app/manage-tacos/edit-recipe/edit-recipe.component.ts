@@ -100,8 +100,7 @@ export class EditRecipeComponent implements OnInit {
     this.form.valueChanges
       .pipe(filter(() => this.form.valid))
       .subscribe((val) => {
-        localStorage.setItem('EDITRECIPE', JSON.stringify(val));
-
+        this.storeFormInLocal();
         const data: Recipe = this.recipeInEdit;
         data.recipeName = this.f.recipeName.value;
         this.updateTacoData(data);
@@ -122,24 +121,61 @@ export class EditRecipeComponent implements OnInit {
   }
 
   // tslint:disable-next-line: typedef
+  updateLocalToppings(chgdValue: string, checked: boolean) {
+    const draft = localStorage.getItem('EDITRECIPE');
+    if (draft) {
+      const recipe: Recipe = JSON.parse(draft);
+      if (checked === false) {
+        if (recipe.toppings?.includes(chgdValue)) {
+          recipe.toppings.splice(recipe.toppings.indexOf(chgdValue), 1);
+        }
+      } else {
+        if (recipe.toppings?.includes(chgdValue)) {
+          return;
+        } else {
+          recipe.toppings?.push(chgdValue);
+        }
+      }
+      this.recipeInEdit = { ...recipe };
+
+      localStorage.setItem('EDITRECIPE', JSON.stringify(recipe));
+    }
+  }
+
+  // tslint:disable-next-line: typedef
   onCheckboxChange(e: any) {
     const checkArray: FormArray = this.form.get('toppings') as FormArray;
 
     if (e.target.checked) {
       checkArray.push(new FormControl(e.target.value));
-      localStorage.setItem('EDITRECIPE', JSON.stringify(this.form.value));
     } else {
+      this.updateLocalToppings(e.target.value, false);
       let i = 0;
       checkArray.controls.forEach((item: AbstractControl) => {
         if (item.value === e.target.value) {
           checkArray.removeAt(i);
-          localStorage.setItem('EDITRECIPE', JSON.stringify(this.form.value));
           return;
         }
         i++;
       });
     }
   }
+
+  // tslint:disable-next-line: typedef
+  storeFormInLocal() {
+    console.log('storing draft');
+    localStorage.setItem('EDITRECIPE', JSON.stringify(this.form.value));
+
+    if (this.recipeInEdit) {
+      if (this.recipeInEdit.toppings) {
+        this.recipeInEdit.toppings.forEach((topping) => {
+          this.updateLocalToppings(topping, true);
+        });
+      }
+    }
+    localStorage.setItem('EDITRECIPE', JSON.stringify(this.recipeInEdit));
+  }
+
   // tslint:disable-next-line: typedef
   onSave() {
     const draft = localStorage.getItem('EDITRECIPE');

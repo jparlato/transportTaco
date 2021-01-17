@@ -86,6 +86,7 @@ export class CreateTacoComponent implements OnInit {
   // }
 
   ngOnInit(): void {
+    localStorage.clear();
     this.tacoData$ = this.tacoStateService.tacoData;
   }
 

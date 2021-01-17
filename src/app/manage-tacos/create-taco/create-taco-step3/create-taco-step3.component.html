@@ -1,26 +1,15 @@
 <div [formGroup]="form">
 
-  <!-- <mat-form-field>
+  <div *ngIf="form">
 
-    <mat-select placeholder="Select Toppings Type" formControlName="toppingsType">
+    <ng-container formArrayName="toppings">
+      <div *ngFor="let cb of toppingsTypes$ | async; let i=index">
+        <label>
+          <input type="checkbox" [value]="cb.code" (change)="onCheckboxChange($event)" />
+          {{cb.description}}
+        </label>
+      </div>
+    </ng-container>
 
-      <ng-container *ngFor="let topping of (toppingsTypes$ | async)">
-
-        <mat-option [value]="topping.code">{{topping.description}}</mat-option>
-
-      </ng-container>
-
-    </mat-select>
-
-  </mat-form-field> -->
-
-  <ng-container formArrayName="toppings">
-    <div *ngFor="let cb of toppingsTypes$ | async; let i=index">
-      <label>
-        <input type="checkbox" [value]="cb.code" (change)="onCheckboxChange($event)" />
-        {{cb.description}}
-      </label>
-    </div>
-  </ng-container>
-
+  </div>
 </div>
