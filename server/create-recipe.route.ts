@@ -7,8 +7,6 @@ export let recipeKeyCounter = 100;
 // tslint:disable-next-line: typedef
 export function createRecipe(req: Request, res: Response) {
   console.log('Creating new recipe ...');
-  // tslint:disable-next-line: no-debugger
-  // debugger;
   const changes = req.body;
   console.log(`reqest:  ${req}`);
 
