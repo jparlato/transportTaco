@@ -14,7 +14,7 @@ import {
   ToppingType,
 } from './../interfaces/taco-interfaces';
 
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { Recipe } from 'src/app/entities/recipe';
 import { TacoData } from './../../entities/taco-data';
@@ -58,6 +58,7 @@ export class EditRecipeComponent implements OnInit {
   toppingsTypes$!: Observable<ToppingType[]> | undefined;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private tacoService: TacoService,
@@ -187,6 +188,7 @@ export class EditRecipeComponent implements OnInit {
       const recipe: any = JSON.parse(draft);
       console.log(`saving ${JSON.stringify(recipe)}`);
       this.tacoService.saveRecipe(recipe.id, recipe).subscribe(() => {});
+      this.router.navigateByUrl(`manage-tacos/list-recipes`);
     }
   }
 

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import {
   AbstractControl,
   FormBuilder,
@@ -24,6 +25,7 @@ export class CreateTacoComponent implements OnInit {
   tacoData$: Observable<TacoData> = of({ recipeName: '' });
 
   constructor(
+    private router: Router,
     private fb: FormBuilder,
     private tacoStateService: TacoStateService,
     private tacoService: TacoService
@@ -69,21 +71,11 @@ export class CreateTacoComponent implements OnInit {
     if (recipeToSave && recipeToSave.recipeName.length > 0) {
       this.tacoService.createRecipe(recipeToSave).subscribe(() => {});
       console.log(recipeToSave);
+      this.router.navigateByUrl(`manage-tacos/list-recipes`);
     } else {
       console.log('Invalid recipe cannot be saved.');
     }
   }
-
-  // createRecipe({
-  //   recipeName = '',
-  //   shellType = '',
-  //   proteinType = '',
-  //   toppingsType = '',
-  //   id = 0,
-  //   toppings: [],
-  // }): Recipe {
-  //   return { recipeName, shellType, proteinType, toppingsType, id, toppings };
-  // }
 
   ngOnInit(): void {
     localStorage.clear();
