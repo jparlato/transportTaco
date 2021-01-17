@@ -38,6 +38,8 @@ const recipeToSave: Recipe = {
 export class EditRecipeComponent implements OnInit {
   recipeInEdit!: Recipe;
 
+  tacoData$: Observable<TacoData> = of({ recipeName: '' });
+
   form: FormGroup = this.fb.group({
     recipeName: [
       '',
@@ -63,6 +65,7 @@ export class EditRecipeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.tacoData$ = this.tacoStateService.tacoData;
     this.shellTypes$ = this.tacoService.findTacoShellTypes();
     this.proteinTypes$ = this.tacoService.findTacoProteinTypes();
     this.toppingsTypes$ = this.tacoService.findTacoToppingTypes();

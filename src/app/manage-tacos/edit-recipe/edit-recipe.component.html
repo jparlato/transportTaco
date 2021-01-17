@@ -79,8 +79,8 @@
       <mat-card-title>Your Current Recipe:</mat-card-title>
       <mat-card-subtitle></mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content *ngIf="recipeFound$ | async as rp">
-      {{ rp.recipeName }}
+    <mat-card-content *ngIf="tacoData$ | async as tdata">
+      {{ tdata.recipeName }}
     </mat-card-content>
   </mat-card>
 
