@@ -1,3 +1,4 @@
+import { ToppingType } from './../manage-tacos/interfaces/taco-interfaces';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -27,7 +28,7 @@ export class TacoService {
   }
 
   // tslint:disable-next-line: typedef
-  findTacoToppingTypes() {
+  findTacoToppingTypes(): Observable<ToppingType[]> {
     return this.http
       .get(`/api/getToppingTypes`)
       .pipe(map((res: any) => res['ToppingsTypes']));
