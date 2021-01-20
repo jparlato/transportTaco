@@ -12,7 +12,7 @@ import { ManageTacoModule } from './manage-tacos/manage-taco.module';
 import { NgModule } from '@angular/core';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { StoreModule } from '@ngrx/store';
-import { appReducer } from './app.reducer';
+import { reducers } from './app.reducer';
 
 // const matmodules = [MatToolbarModule,  MatButtonModule, MatIconModule]
 
@@ -28,7 +28,7 @@ import { appReducer } from './app.reducer';
     ManageTacoModule,
     FormsModule,
     ReactiveFormsModule,
-    StoreModule.forRoot({ ui: appReducer }),
+    StoreModule.forRoot(reducers),
   ],
   providers: [],
   bootstrap: [AppComponent],

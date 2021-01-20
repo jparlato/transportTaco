@@ -1,4 +1,5 @@
-import * as fromApp from '../app.reducer';
+import * as UI from '../shared/ui.actions';
+import * as fromRootStore from '../app.reducer';
 
 import { delay, map, tap } from 'rxjs/operators';
 
@@ -15,7 +16,7 @@ import { ToppingType } from './../manage-tacos/interfaces/taco-interfaces';
 export class TacoService {
   constructor(
     private http: HttpClient,
-    private store: Store<{ ui: fromApp.State }>
+    private store: Store<fromRootStore.State>
   ) {}
 
   // findCourseById(courseId: number): Observable<Course> {
@@ -67,10 +68,10 @@ export class TacoService {
   }
 
   findAllRecipes(): Observable<Recipe[]> {
-    this.store.dispatch({ type: 'START_LOADING' });
+    this.store.dispatch(new UI.StartLoading());
     return this.http.get('/api/recipes').pipe(
       delay(5000),
-      tap(() => this.store.dispatch({ type: 'STOP_LOADING' })),
+      tap(() => this.store.dispatch(new UI.StopLoading())),
       map((res: any) => res.payload)
     );
   }
