@@ -1,13 +1,22 @@
-import { ToppingType } from './../manage-tacos/interfaces/taco-interfaces';
+import * as fromApp from '../app.reducer';
+
+import { delay, map, tap } from 'rxjs/operators';
+
 import { HttpClient } from '@angular/common/http';
+import { InitialState } from '@ngrx/store/src/models';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Recipe } from '../entities/recipe';
-import { map } from 'rxjs/operators';
+import { State } from './../app.reducer';
+import { Store } from '@ngrx/store';
+import { ToppingType } from './../manage-tacos/interfaces/taco-interfaces';
 
 @Injectable()
 export class TacoService {
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private store: Store<{ ui: fromApp.State }>
+  ) {}
 
   // findCourseById(courseId: number): Observable<Course> {
   //     return this.http.get<Course>(`/api/courses/${courseId}`);
@@ -17,21 +26,21 @@ export class TacoService {
   findTacoShellTypes() {
     return this.http
       .get(`/api/getShellTypes`)
-      .pipe(map((res: any) => res['shellTypes']));
+      .pipe(map((res: any) => res.shellTypes));
   }
 
   // tslint:disable-next-line: typedef
   findTacoProteinTypes() {
     return this.http
       .get(`/api/getProteinTypes`)
-      .pipe(map((res: any) => res['ProteinTypes']));
+      .pipe(map((res: any) => res.ProteinTypes));
   }
 
   // tslint:disable-next-line: typedef
   findTacoToppingTypes(): Observable<ToppingType[]> {
     return this.http
       .get(`/api/getToppingTypes`)
-      .pipe(map((res: any) => res['ToppingsTypes']));
+      .pipe(map((res: any) => res.ToppingsTypes));
   }
 
   // tslint:disable-next-line: typedef
@@ -58,8 +67,10 @@ export class TacoService {
   }
 
   findAllRecipes(): Observable<Recipe[]> {
-    return this.http
-      .get('/api/recipes')
-      .pipe(map((res: any) => res['payload']));
+    this.store.dispatch({ type: 'START_LOADING' });
+    return this.http.get('/api/recipes').pipe(
+      tap(() => this.store.dispatch({ type: 'STOP_LOADING' })),
+      map((res: any) => res.payload)
+    );
   }
 }

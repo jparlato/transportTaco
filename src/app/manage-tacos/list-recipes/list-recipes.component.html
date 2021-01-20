@@ -2,7 +2,7 @@
   <div>
     <p>Recipe List</p>
   </div>
-  <div *ngIf="recipesFound$; else notfound_content">
+  <div *ngIf="!(isLoading$ | async); else notfound_content">
     <li *ngFor="let recipe of recipesFound$ | async">
       <mat-label>ID: {{ recipe.id }} </mat-label>
       <button mat-raised-button color="warn" (click)="onDeleteRecipe(recipe)">
@@ -29,6 +29,6 @@
   </div>
 
 
-  <ng-template #notfound_content>Loading please wait...</ng-template>
+  <ng-template #notfound_content>NGRX - STATE Loading please wait...</ng-template>
 
 </div>

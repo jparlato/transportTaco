@@ -1,10 +1,13 @@
+import * as fromApp from '../../app.reducer';
+
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subscription, of } from 'rxjs';
 
 import { Recipe } from 'src/app/entities/recipe';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { TacoService } from './../../services/taco-service';
-import { getAllRecipes } from 'server/get-recipes.route';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-list-recipes',
@@ -14,10 +17,17 @@ import { getAllRecipes } from 'server/get-recipes.route';
 export class ListRecipesComponent implements OnInit {
   subcriptions!: Subscription;
   recipesFound$!: Observable<Recipe[]>;
+  isLoading$!: Observable<boolean>;
 
-  constructor(private tacoService: TacoService, private router: Router) {}
+  constructor(
+    private tacoService: TacoService,
+    private router: Router,
+    private store: Store<{ ui: fromApp.State }>
+  ) {}
 
   ngOnInit(): void {
+    this.isLoading$ = this.store.select((state: any) => state.ui.isLoading);
+
     this.getRecipes();
   }
 
