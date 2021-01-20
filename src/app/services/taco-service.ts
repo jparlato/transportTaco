@@ -69,6 +69,7 @@ export class TacoService {
   findAllRecipes(): Observable<Recipe[]> {
     this.store.dispatch({ type: 'START_LOADING' });
     return this.http.get('/api/recipes').pipe(
+      delay(5000),
       tap(() => this.store.dispatch({ type: 'STOP_LOADING' })),
       map((res: any) => res.payload)
     );
