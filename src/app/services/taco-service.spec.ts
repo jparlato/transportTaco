@@ -1,15 +1,18 @@
-import { recipeKeyCounter } from './../../../server/create-recipe.route';
-import { Recipe } from 'src/app/entities/recipe';
-import { environment } from './../../environments/environment';
-import { getAllRecipes } from 'server/get-recipes.route';
 import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { HttpClient } from '@angular/common/http';
-import { TacoService } from './taco-service';
-import { inject, TestBed } from '@angular/core/testing';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { Observable, of } from 'rxjs';
+import { TestBed, inject } from '@angular/core/testing';
+
+import { HttpClient } from '@angular/common/http';
+import { Recipe } from 'src/app/entities/recipe';
+import { TacoService } from './taco-service';
+import { environment } from './../../environments/environment';
+import { getAllRecipes } from 'server/get-recipes.route';
+import { recipeKeyCounter } from './../../../server/create-recipe.route';
+
 const toppingMock = [{ code: 'CHEESE', description: 'GOOD CHEESE' }];
 
 fdescribe('Taco Service', () => {
@@ -17,6 +20,9 @@ fdescribe('Taco Service', () => {
   let httpClient: HttpClient;
   let httpMock: HttpTestingController;
 
+  const initialState = {
+    isLoading: false,
+  };
   // tslint:disable-next-line: one-variable-per-declaration
   // let tacoService: TacoService,
   //   mockService = {
@@ -28,7 +34,7 @@ fdescribe('Taco Service', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [{ provide: TacoService }],
+      providers: [{ provide: TacoService }, provideMockStore({ initialState })],
     });
 
     spyOn(HttpClient.prototype, 'request').and.callThrough();
