@@ -17,6 +17,7 @@ import { TacoServiceStub } from './../testing-support/taco-service-stub';
 import { provideMockStore } from '@ngrx/store/testing';
 import { of } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { ListRecipes } from '../recipe-mocks/recipe-lists';
 
 fdescribe('ListRecipesComponent', () => {
   let component: ListRecipesComponent;
@@ -62,16 +63,7 @@ fdescribe('ListRecipesComponent', () => {
   it('should return a list of all recipes', fakeAsync(() => {
     fixture.detectChanges();
     spyOn(tacoService, 'findAllRecipes').and.returnValue(
-      of([
-        {
-          id: 1,
-          recipeName: 'SamsOne',
-          shellType: 'SOFTSHELL',
-          proteinType: 'MEAT',
-          toppingsType: 'CHEESE',
-          toppings: ['CHEESE', 'SOUR CREAM'],
-        },
-      ])
+      of(ListRecipes.ALL_RECIPES_ONE)
     );
 
     tick();
@@ -80,16 +72,8 @@ fdescribe('ListRecipesComponent', () => {
     tick();
     fixture.detectChanges();
     component.recipesFound$.subscribe((x) => {
-      expect(x).toEqual([
-        {
-          id: 1,
-          recipeName: 'SamsOne',
-          shellType: 'SOFTSHELL',
-          proteinType: 'MEAT',
-          toppingsType: 'CHEESE',
-          toppings: ['CHEESE', 'SOUR CREAM'],
-        },
-      ]);
+      console.log(x);
+      expect(x).toEqual(ListRecipes.ALL_RECIPES_ONE);
     });
     flush();
   }));
