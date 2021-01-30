@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { TacoService } from './../../services/taco-service';
 import { map } from 'rxjs/operators';
+import { provideMockStore } from '@ngrx/store/testing';
 
 @Component({
   selector: 'app-list-recipes',
@@ -27,7 +28,6 @@ export class ListRecipesComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading$ = this.store.select((state: any) => state.ui.isLoading);
-
     this.getRecipes();
   }
 

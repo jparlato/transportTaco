@@ -1,5 +1,4 @@
 import { TacoStateService } from './taco-state-service';
-import { of } from 'rxjs';
 
 fdescribe('Recipe State Service', () => {
   it('should set next recipe name', () => {
