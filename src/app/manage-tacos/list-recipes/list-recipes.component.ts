@@ -1,4 +1,5 @@
 import * as fromApp from '../../app.reducer';
+import * as fromRoot from '../../shared/ui.reducer';
 
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subscription, of } from 'rxjs';
@@ -23,7 +24,7 @@ export class ListRecipesComponent implements OnInit {
   constructor(
     private tacoService: TacoService,
     private router: Router,
-    private store: Store<{ ui: fromApp.State }>
+    private store: Store<fromRoot.State>
   ) {}
 
   ngOnInit(): void {
